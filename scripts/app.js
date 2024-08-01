@@ -3,6 +3,7 @@ import {
     contract_address
 } from './dotenv.js';
 
+
 document.getElementById("Connect").addEventListener('click', async () => {
 
     if (typeof window.ethereum != undefined) {
@@ -40,19 +41,55 @@ document.getElementById("Connect").addEventListener('click', async () => {
 
 
             document.getElementById("depositbtn").addEventListener("click", async () => {
-                console.log("Depositing  ");
+                console.log("Depositing.... ");
                 const amount = document.getElementById("depositAmount").value;
-                await walletContractInstance.methods.deposit().send({from:defaultAccount,value:amount});
-                console.log(amount,"is deposited ");
+                const ret = await walletContractInstance.methods.deposit().send({ from: defaultAccount, value: amount });
+                console.log(amount, "is deposited ");
+
+                document.getElementById("DepositedShow").innerText = `Deposited : ${amount}`;
 
             })
 
-            document.getElementById("showMyBalance").addEventListener("click", async() =>{
+            document.getElementById("showMyBalance").addEventListener("click", async () => {
                 console.log("showing your balance");
-                const call = await walletContractInstance.methods.myBalance().call();
-                console.log(call);
+                const call = await walletContractInstance.methods.myBalance().call({ from: defaultAccount });
+                console.log(call.toString());
+
+                const balanceInEther = web3.utils.fromWei(call, 'ether');
+                console.log("Balance (in ether):", balanceInEther);
+
+                document.getElementById("BalanceShow").innerText =
+                    `Your balance is : ${call} wei `;
+
 
             })
+
+            document.getElementById("transfer").addEventListener("click", async () => {
+
+
+                const amount = document.getElementById("transferAmount").value;
+                const receiver = document.getElementById("recipient").value;
+
+                console.log("Transfering...");
+
+                await walletContractInstance.methods.transferTo(amount,receiver).send({from:defaultAccount});
+
+                console.log("Transfered");
+
+
+
+            })
+
+            document.getElementById("withdraw").addEventListener("click", async () => {
+
+
+                const amount = document.getElementById("withdrawAmount").value;
+                console.log("Withdrawing!!!");
+                const value = await walletContractInstance.methods.withdraw(amount).send({ from: defaultAccount });
+                console.log(amount);
+            })
+
+
 
 
 
@@ -67,7 +104,7 @@ document.getElementById("Connect").addEventListener('click', async () => {
 
     }
     else {
-        console.log("Not connected ");
+        console.log("install metamask  ");
     }
 
 });

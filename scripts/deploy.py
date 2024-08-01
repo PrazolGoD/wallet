@@ -16,7 +16,7 @@ deployer = w3.eth.accounts[0]
 print("Deployed by : ",deployer)
 
 # Read the contract ABI and bytecode
-with open('artifacts\contracts\projectwallet.sol\wallet.json', 'r') as file:
+with open("./artifacts\contracts\projectwallet.sol\wallet.json", 'r') as file:
     contract_json = json.load(file)
     abi = contract_json['abi']
     bytecode = contract_json['bytecode']

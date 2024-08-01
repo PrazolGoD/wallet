@@ -19,32 +19,35 @@
     </button>
     <div>
         <h3>Deposit</h3>
-        <input type="text" id="depositAmount" placeholder="Amount to Deposit (ETH)">
-        <button id="depositbtn">Deposit</button>
+        <input type="text" id="depositAmount" placeholder="Amount to Deposit (WEI)">
+        <span id="DepositedShow"></span>
+        <button id="depositbtn" >Deposit</button>
     </div>
 
     <div>
         <h3>Withdraw</h3>
-        <input type="text" id="withdrawAmount" placeholder="Amount to Withdraw (ETH)">
-        <button onclick="withdraw()">Withdraw</button>
+        <input type="text" id="withdrawAmount" placeholder="Amount to Withdraw (WEI)">
+        <button id="withdraw">Withdraw</button>
     </div>
 
     <div>
         <h3>Transfer</h3>
         <input type="text" id="recipient" placeholder="Recipient Address">
-        <input type="text" id="transferAmount" placeholder="Amount to Transfer (ETH)">
-        <button onclick="transfer()">Transfer</button>
+        <input type="text" id="transferAmount" placeholder="Amount to Transfer (WEI)">
+        <button id="transfer">Transfer</button>
     </div>
     <div>
         <h3>Mybalance</h3>
+        <span id="BalanceShow"></span>
         <button id="showMyBalance">Balance</button>
     </div>
 
 
 
 
+
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script type="module" src="app.js" ></script>
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>
